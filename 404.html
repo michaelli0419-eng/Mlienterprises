@@ -12,23 +12,73 @@
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
-    background: #f7f5f0; color: #1c1e23;
+    background: #0c3357; color: #f0f6fc;
     font-family: "Cormorant Garamond", Georgia, serif;
     min-height: 100vh; display: flex; align-items: center; justify-content: center;
     text-align: center; padding: 28px;
+    position: relative; overflow: hidden;
   }
-  .code { font-family: "DM Mono", ui-monospace, Consolas, monospace; font-size: 13px; letter-spacing: 0.28em; color: #806428; margin-bottom: 20px; }
-  h1 { font-size: clamp(1.8rem, 1.2rem + 2.5vw, 2.6rem); font-weight: 500; line-height: 1.25; margin-bottom: 24px; }
-  h1 em { font-style: italic; color: #806428; }
-  a { font-family: "DM Mono", ui-monospace, Consolas, monospace; font-size: 13px; letter-spacing: 0.08em; color: #806428; text-decoration: none; border-bottom: 1px solid rgba(128,100,40,0.35); }
-  a:hover { border-bottom-color: #806428; }
+  body::before {
+    content: ""; position: absolute; inset: 0;
+    background-image:
+      radial-gradient(ellipse 70% 80% at 50% 40%, rgba(20, 74, 119, 0.6), transparent 100%),
+      linear-gradient(rgba(169, 206, 233, 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(169, 206, 233, 0.07) 1px, transparent 1px);
+    background-size: auto, 48px 48px, 48px 48px;
+    pointer-events: none;
+  }
+  body::after {
+    content: ""; position: absolute; inset: 16px;
+    border: 1px solid rgba(169, 206, 233, 0.35);
+    outline: 1px solid rgba(169, 206, 233, 0.15);
+    outline-offset: 14px;
+    pointer-events: none;
+  }
+  .sheet { position: relative; }
+  ::selection { background: #d8b46a; color: #0c3357; }
+  .code {
+    font-family: "DM Mono", ui-monospace, Consolas, monospace;
+    font-size: 13px; letter-spacing: 0.3em; color: #d8b46a; margin-bottom: 22px;
+  }
+  .code::after { content: ""; display: block; width: 36px; height: 1px; background: #b89a5a; margin: 16px auto 0; }
+  h1 { font-size: clamp(1.9rem, 1.2rem + 2.8vw, 2.8rem); font-weight: 500; line-height: 1.25; margin-bottom: 26px; }
+  h1 em { font-style: italic; color: #d8b46a; }
+  .note {
+    font-family: "DM Mono", ui-monospace, Consolas, monospace;
+    font-size: 11px; letter-spacing: 0.2em; color: #7ba7cd; margin-bottom: 34px;
+  }
+  a {
+    font-family: "DM Mono", ui-monospace, Consolas, monospace;
+    font-size: 13px; letter-spacing: 0.08em; color: #d8b46a; text-decoration: none;
+    display: inline-block; padding: 12px 22px;
+    background: rgba(10, 44, 78, 0.6);
+    border: 1px solid rgba(169, 206, 233, 0.3); border-radius: 3px;
+    transition: border-color 180ms ease, box-shadow 180ms ease;
+  }
+  a:hover { border-color: #d8b46a; box-shadow: 0 0 28px rgba(216, 180, 106, 0.18); }
+  .tb {
+    position: absolute; right: 30px; bottom: 30px; text-align: left;
+    font-family: "DM Mono", ui-monospace, Consolas, monospace;
+    font-size: 9px; letter-spacing: 0.16em; color: #7ba7cd;
+    border: 1px solid rgba(169, 206, 233, 0.3); padding: 10px 14px;
+    background: rgba(10, 44, 78, 0.55);
+  }
+  .tb span { display: block; line-height: 1.9; }
+  .tb .co { color: #d8b46a; }
+  @media (max-width: 560px) { .tb { display: none; } }
 </style>
 </head>
 <body>
-  <div>
+  <div class="sheet">
     <div class="code">404</div>
-    <h1>This page <em>doesn't exist</em>.</h1>
-    <a href="/">Back to MLI Enterprises</a>
+    <h1>This sheet <em>was never drawn</em>.</h1>
+    <p class="note">PLAN OF LOS ANGELES · SHEET NOT IN SET</p>
+    <a href="/">Back to the full set</a>
+  </div>
+  <div class="tb" aria-hidden="true">
+    <span class="co">MLI ENTERPRISES</span>
+    <span>SHEET 404 · NOT FOUND</span>
+    <span>REV — · SCALE N/A</span>
   </div>
 </body>
 </html>
