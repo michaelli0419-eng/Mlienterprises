@@ -42,8 +42,9 @@
     --hairline: rgba(28, 30, 35, 0.12);
     --shadow: 0 1px 2px rgba(28,30,35,0.04), 0 8px 28px rgba(28,30,35,0.06);
     --step-5: clamp(2.1rem, 1.2rem + 3.4vw, 3.5rem);
-    --step-2: clamp(1.35rem, 1.15rem + 0.8vw, 1.7rem);
-    --step-0: clamp(1.075rem, 1rem + 0.3vw, 1.2rem);
+    --step-3: clamp(1.7rem, 1.35rem + 1.5vw, 2.4rem);
+    --step-2: clamp(1.4rem, 1.2rem + 0.9vw, 1.8rem);
+    --step-0: clamp(1.02rem, 0.96rem + 0.25vw, 1.12rem);
     --space-section: clamp(4rem, 3rem + 5vw, 7.5rem);
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -58,7 +59,7 @@
   }
   ::selection { background: var(--gold-soft); color: #fff; }
 
-  .mono, h2, .sec-num, .wordmark, .est, .tag, footer, footer a, .skip, nav a, .step-n {
+  .mono, .sec-num, .wordmark, .est, .tag, footer, footer a, .skip, nav a, .step-n {
     font-family: "DM Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
   }
   .wrap { max-width: 1060px; margin: 0 auto; padding: 0 28px; }
@@ -119,13 +120,15 @@
   .hero ::selection { background: #d8b46a; color: #0c3357; }
 
   section { border-top: 1px solid var(--hairline); padding: var(--space-section) 0; }
-  .sec-grid { display: grid; grid-template-columns: 220px 1fr; gap: 40px; }
-  .sec-label { display: flex; align-items: baseline; gap: 14px; }
-  .sec-num { font-size: 12px; color: var(--gold); letter-spacing: 0.08em; }
-  h2 { font-size: 12px; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); }
+  .sec-grid { display: grid; grid-template-columns: 240px 1fr; gap: 56px; align-items: start; }
+  .sec-label { position: sticky; top: 96px; }
+  .sec-num { display: block; font-size: 12px; color: var(--gold); letter-spacing: 0.2em; margin-bottom: 14px; }
+  .sec-num::after { content: ""; display: block; width: 32px; height: 1px; background: var(--gold-soft); margin-top: 14px; }
+  h2 { font-size: var(--step-3); font-weight: 600; line-height: 1.12; color: var(--ink); }
 
-  .block + .block { margin-top: 44px; }
-  .block h3 { font-size: var(--step-2); font-weight: 600; line-height: 1.3; }
+  .block + .block { margin-top: 48px; }
+  .block h3 { font-size: var(--step-2); font-weight: 600; line-height: 1.25; }
+  .block p, .work-item p, .who p, .contact p { color: var(--muted); font-size: 0.95em; line-height: 1.7; }
   .block p { max-width: 58ch; }
   .block-head { display: flex; align-items: center; gap: 16px; margin-bottom: 10px; }
   .icon { width: 32px; height: 32px; flex: none; stroke: var(--gold); fill: none; stroke-width: 1.25; stroke-linecap: round; stroke-linejoin: round; }
@@ -149,15 +152,15 @@
   .work-note { margin-top: 26px; font-size: 0.92em; color: var(--faint); font-style: italic; }
 
   ul.principles { list-style: none; }
-  .principles li { padding: 18px 0 18px 44px; position: relative; max-width: 60ch; }
+  .principles li { padding: 26px 0 26px 52px; position: relative; max-width: 58ch; color: var(--muted); font-size: 0.95em; line-height: 1.7; }
   .principles li + li { border-top: 1px solid var(--hairline); }
   .principles li::before {
     content: attr(data-n);
     font-family: "DM Mono", ui-monospace, Consolas, monospace;
     font-size: 12px; color: var(--gold);
-    position: absolute; left: 0; top: 24px;
+    position: absolute; left: 0; top: 36px;
   }
-  .principles strong { font-weight: 600; }
+  .principles strong { display: block; font-weight: 600; color: var(--ink); font-size: var(--step-2); line-height: 1.25; margin-bottom: 6px; }
 
   .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; counter-reset: step; }
   .step {
@@ -209,7 +212,8 @@
     .steps { grid-template-columns: repeat(2, 1fr); }
   }
   @media (max-width: 760px) {
-    .sec-grid { grid-template-columns: 1fr; gap: 28px; }
+    .sec-grid { grid-template-columns: 1fr; gap: 32px; }
+    .sec-label { position: static; }
     nav { display: none; }
   }
   @media (max-width: 540px) {
@@ -463,14 +467,14 @@
           <svg class="icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="9" r="3"/><path d="M22.5 11.8 L13 38"/><path d="M25.5 11.8 L35 38"/><path d="M13 38 Q24 44 35 38"/></svg>
           <h3>Operational &amp; management consulting</h3>
         </div>
-        <p>We work with owners and operators on process, reporting, and systems decisions. Engagements are scoped around a specific operational problem and end when it is solved.</p>
+        <p>We work with owners and operators on process, reporting, and systems decisions — scoped to one problem, done when it's solved.</p>
       </div>
       <div class="block reveal">
         <div class="block-head">
           <svg class="icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M14 14 L6 24 L14 34"/><path d="M34 14 L42 24 L34 34"/><rect x="20" y="20" width="8" height="8"/></svg>
           <h3>Custom application development</h3>
         </div>
-        <p>We design and build software for the specifics of your business when off-the-shelf tools don't fit. Typical work includes internal tools, workflow systems, and integrations between the systems you already run.</p>
+        <p>Internal tools, workflow systems, and integrations between the systems you already run — built when off-the-shelf software doesn't fit your business.</p>
       </div>
     </div>
   </div>
@@ -485,7 +489,7 @@
           <svg class="icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M12 18 L24 10 L36 18 L24 26 Z"/><path d="M12 18 V32 L24 40 V26"/><path d="M36 18 V32 L24 40"/></svg>
           <h3>Production &amp; scheduling system for a modular manufacturer</h3>
         </div>
-        <p>A factory running a 15-station production line was scheduling in spreadsheets. We built the system that now plans line capacity, advances modules station by station from the shop floor, and tracks every module by QR code from the line to the job site.</p>
+        <p>A 15-station line was scheduled in spreadsheets. The system we built now plans capacity, advances modules from the shop floor, and tracks each one by QR code to the job site.</p>
         <span class="tag">Manufacturing · Scheduling · Field tracking</span>
       </div>
       <div class="work-item reveal">
@@ -493,7 +497,7 @@
           <svg class="icon" viewBox="0 0 48 48" aria-hidden="true"><rect x="10" y="8" width="28" height="32"/><path d="M16 33 L31 33 L16 18 Z"/></svg>
           <h3>Estimating platform replacing a spreadsheet workflow</h3>
         </div>
-        <p>An estimating team was rebuilding every bid by hand in Excel. We built a versioned estimating engine that goes from drawings to a bill of materials to a client-ready proposal, validated against the company's own historical bids before it replaced anything.</p>
+        <p>Every bid was rebuilt by hand in Excel. Our versioned estimating engine goes from drawings to bill of materials to client-ready proposal — validated against the company's own historical bids.</p>
         <span class="tag">Estimating · BOM · Proposals</span>
       </div>
       <div class="work-item reveal">
@@ -501,7 +505,7 @@
           <svg class="icon" viewBox="0 0 48 48" aria-hidden="true"><rect x="10" y="8" width="28" height="32"/><path d="M16 16 H32"/><path d="M16 22 H32"/><path d="M16 28 H26"/><path d="M17 34 L20 37 L27 30"/></svg>
           <h3>Month-end close and job-cost automation for a construction group</h3>
         </div>
-        <p>A controller was closing the books over weeks of manual journal entries. We automated WIP schedules, payroll allocations, and owner billing against the existing ERP — replicating the controller's exact postings rather than asking the team to change how they work.</p>
+        <p>Month-end close ran on weeks of manual journal entries. We automated WIP schedules, payroll allocations, and owner billing against the existing ERP — matching the controller's exact postings.</p>
         <span class="tag">Accounting · ERP integration · Automation</span>
       </div>
       <p class="work-note">Client names withheld. References available on request.</p>
@@ -519,9 +523,9 @@
   <div class="wrap sec-grid">
     <div class="sec-label reveal"><span class="sec-num">03</span><h2>How we work</h2></div>
     <ul class="principles">
-      <li class="reveal" data-n="i."><strong>Fixed scope, in writing.</strong> Engagements run under a signed MSA and SOW — you know what you're getting and what it costs before we start.</li>
-      <li class="reveal" data-n="ii."><strong>Your IP, on payment.</strong> Deliverable IP assigns to the client when the invoice is paid. No lock-in, no licensing tail.</li>
-      <li class="reveal" data-n="iii."><strong>Working software over decks.</strong> Clear communication, short feedback loops, and something you can use — not a slide about it.</li>
+      <li class="reveal" data-n="i."><strong>Fixed scope, in writing.</strong> A signed MSA and SOW — you know the deliverables and the price before we start.</li>
+      <li class="reveal" data-n="ii."><strong>Your IP, on payment.</strong> Deliverable IP assigns to you when the invoice is paid. No lock-in, no licensing tail.</li>
+      <li class="reveal" data-n="iii."><strong>Working software over decks.</strong> Short feedback loops and something you can use — not a slide about it.</li>
     </ul>
   </div>
 </section>
@@ -534,25 +538,25 @@
         <svg class="icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="10"/><path d="M24 6 V14"/><path d="M24 34 V42"/><path d="M6 24 H14"/><path d="M34 24 H42"/></svg>
         <span class="step-n">01</span>
         <h3>Scope</h3>
-        <p>A working session on the actual problem, then a written SOW with deliverables, timeline, and price.</p>
+        <p>A working session on the problem, then a written SOW: deliverables, timeline, price.</p>
       </div>
       <div class="step reveal">
         <svg class="icon" viewBox="0 0 48 48" aria-hidden="true"><rect x="10" y="28" width="12" height="10"/><rect x="26" y="28" width="12" height="10"/><rect x="18" y="14" width="12" height="10"/></svg>
         <span class="step-n">02</span>
         <h3>Build</h3>
-        <p>Short cycles with working software to react to every week or two — not a reveal at the end.</p>
+        <p>Working software to react to every week or two — not a reveal at the end.</p>
       </div>
       <div class="step reveal">
         <svg class="icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M10 26 V40 H38 V26"/><path d="M24 32 V10"/><path d="M16 17 L24 9 L32 17"/></svg>
         <span class="step-n">03</span>
         <h3>Ship</h3>
-        <p>Deployed into your real workflow, alongside the systems you already run, with your data.</p>
+        <p>Deployed into your real workflow, alongside the systems you already run.</p>
       </div>
       <div class="step reveal">
         <svg class="icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="16" cy="24" r="7"/><path d="M23 24 H40"/><path d="M34 24 V30"/><path d="M40 24 V32"/></svg>
         <span class="step-n">04</span>
         <h3>Handoff</h3>
-        <p>IP assigns on payment. Documentation, training, and optional ongoing support — your call.</p>
+        <p>IP assigns on payment. Documentation, training, and support if you want it.</p>
       </div>
     </div>
   </div>
@@ -562,7 +566,7 @@
   <div class="wrap sec-grid">
     <div class="sec-label reveal"><span class="sec-num">05</span><h2>Who</h2></div>
     <div class="reveal">
-      <p>MLI Enterprises grew out of years inside operating businesses, most recently in operating roles across modular construction and manufacturing companies. The development practice began as software built to run those businesses — production scheduling, estimating, and accounting systems used daily on factory floors and job sites. The firm works in English and Mandarin and is based in California.</p>
+      <p>MLI Enterprises grew out of operating roles in modular construction and manufacturing. The practice began as software built to run those businesses — scheduling, estimating, and accounting systems used daily on factory floors and job sites. The firm works in English and Mandarin, from California.</p>
     </div>
   </div>
 </section>
