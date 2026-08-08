@@ -321,6 +321,15 @@
     margin: 8px 0 22px;
   }
   .who-grid p + p { margin-top: 18px; }
+  .who-tracks { margin: 24px 0; }
+  .who-track { padding: 16px 0 16px 24px; border-left: 2px solid var(--gold-soft); }
+  .who-track + .who-track { margin-top: 16px; }
+  .who-track .k {
+    font-family: "DM Mono", ui-monospace, Consolas, monospace;
+    font-size: 13px; letter-spacing: 0.22em; color: var(--blue);
+    display: block; margin-bottom: 6px;
+  }
+  .who-track p { max-width: 58ch; }
   .who-thesis {
     margin: 26px 0 0; padding: 20px 24px;
     border-left: 3px solid var(--gold-soft);
@@ -973,9 +982,22 @@
       <div>
         <h3 class="who-name">Michael Li</h3>
         <p class="who-role">OPERATOR · INVESTOR · BUILDER</p>
-        <p>Michael spent a decade in private equity, evaluating and operating companies across software, hardware, manufacturing, SaaS, and service businesses. Seeing inside that many companies builds a working map of how businesses actually run — sit him down with a service firm or a factory, and he already knows where the margin leaks and what the pain points are.</p>
-        <p>Most recently he held operating roles across modular construction and manufacturing, including two years inside a modular manufacturer acquired out of bankruptcy — leading its financial restructuring and rebuilding the systems underneath it.</p>
-        <p>The development practice began as software he built to run those businesses — production scheduling, estimating, and accounting systems used daily on factory floors and job sites. Plenty of people can build with AI; far fewer understand how a business operates. The practice lives in that overlap. He studied Economics and Technology Management at UC Santa Barbara, works in English and Mandarin, and is based in California.</p>
+        <p>What makes Michael useful isn't one credential. It's that he has seen business from three seats that almost never meet — he has done the work, financed the work, and built the software that runs it.</p>
+        <div class="who-tracks">
+          <div class="who-track">
+            <span class="k">THE FLOOR</span>
+            <p>Personal trainer. Restaurant server, and the kitchen behind one. A boba shop. Painter on residential job sites. He has worked the jobs most advisors have only modeled — so when an owner describes a problem, he has usually stood where it happens.</p>
+          </div>
+          <div class="who-track">
+            <span class="k">THE CAPITAL</span>
+            <p>A decade in private equity across software, hardware, manufacturing, SaaS, and service businesses — then operating roles in modular construction and manufacturing, including two years leading a manufacturer's restructuring out of bankruptcy. He knows how different kinds of companies actually make and lose money.</p>
+          </div>
+          <div class="who-track">
+            <span class="k">THE BUILD</span>
+            <p>The development practice began as software he built to run those businesses — production scheduling, estimating, and accounting systems used daily on factory floors and job sites.</p>
+          </div>
+        </div>
+        <p>Explain your operation to him once, and he knows what has to change on the floor, what it means for the numbers, and what the software has to do. That's the difference from finance people who never worked the work — and from AI builders who never ran a business. He studied Economics and Technology Management at UC Santa Barbara, works in English and Mandarin, and is based in California.</p>
         <blockquote class="who-thesis">
           "Shape the OS around the company — not the company around the OS."
           <span class="src">From his design thesis, Li-OS — <a href="https://michaelli.co/li-os">read it at michaelli.co</a></span>
