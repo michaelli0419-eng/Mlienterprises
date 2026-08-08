@@ -39,6 +39,11 @@
     --gold: #806428;
     --gold-soft: #b89a5a;
     --gold-wash: rgba(184, 154, 90, 0.12);
+    --bp: #0c3357;
+    --bp-2: #0a2c4e;
+    --blue: #2f6396;
+    --blue-soft: #7ba7cd;
+    --blue-wash: rgba(47, 99, 150, 0.1);
     --hairline: rgba(28, 30, 35, 0.12);
     --shadow: 0 1px 2px rgba(28,30,35,0.04), 0 8px 28px rgba(28,30,35,0.06);
     --step-5: clamp(2.1rem, 1.2rem + 3.4vw, 3.5rem);
@@ -81,7 +86,10 @@
     background: rgba(247, 245, 240, 0.88);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--hairline);
+  }
+  header::after {
+    content: ""; display: block; height: 1px;
+    background: linear-gradient(90deg, var(--gold-soft) 0%, rgba(123, 167, 205, 0.6) 45%, rgba(28, 30, 35, 0.12) 80%);
   }
   header .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
   .wordmark { font-size: 13px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); border: none; }
@@ -146,12 +154,23 @@
   .block h3 { font-size: var(--step-2); font-weight: 600; line-height: 1.25; }
   .block p, .work-item p, .who p, .contact p { color: var(--muted); font-size: 0.95em; line-height: 1.7; }
   .block p { max-width: 58ch; }
-  .block-head { display: flex; align-items: center; gap: 16px; margin-bottom: 10px; }
+  .block-head { display: flex; align-items: center; gap: 18px; margin-bottom: 12px; }
   .icon { width: 32px; height: 32px; flex: none; stroke: var(--gold); fill: none; stroke-width: 1.25; stroke-linecap: round; stroke-linejoin: round; }
-  .work-head { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 8px; }
-  .work-head .icon { margin-top: 5px; }
+  .block-head .icon, .work-head .icon {
+    width: 48px; height: 48px; padding: 10px;
+    background: var(--gold-wash);
+    border: 1px solid rgba(184, 154, 90, 0.3);
+    border-radius: 3px;
+  }
+  .block:nth-child(2) .icon, .work-item:nth-child(2) .icon {
+    background: var(--blue-wash);
+    border-color: rgba(47, 99, 150, 0.3);
+    stroke: var(--blue);
+  }
+  .work-head { display: flex; align-items: flex-start; gap: 18px; margin-bottom: 8px; }
+  .work-head .icon { margin-top: 2px; }
   .work-head h3 { margin-bottom: 0; }
-  .step .icon { width: 26px; height: 26px; margin-bottom: 14px; display: block; }
+  .step .icon { width: 26px; height: 26px; margin-bottom: 14px; display: block; stroke: var(--blue); }
 
   .work-item {
     background: var(--paper-2);
@@ -170,19 +189,40 @@
     background: radial-gradient(240px circle at var(--cx, 50%) var(--cy, 50%), rgba(184, 154, 90, 0.15), transparent 65%);
   }
   .work-item:hover::after, .step:hover::after { opacity: 1; }
+  .work-item::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+    background: linear-gradient(180deg, var(--gold-soft), var(--blue-soft));
+    opacity: 0.75;
+  }
+  .work-item .sht {
+    position: absolute; top: 26px; right: 28px;
+    font-family: "DM Mono", ui-monospace, Consolas, monospace;
+    font-size: 10px; letter-spacing: 0.18em; color: var(--blue-soft);
+  }
   .work-item h3 { font-size: var(--step-2); font-weight: 600; line-height: 1.35; margin-bottom: 8px; }
   .work-item p { max-width: 60ch; }
   .work-item .tag { display: inline-block; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); background: var(--gold-wash); padding: 5px 10px; border-radius: 2px; margin-top: 16px; }
+  .work-item .tag--blue { color: var(--blue); background: var(--blue-wash); }
   .work-note { margin-top: 26px; font-size: 0.92em; color: var(--faint); font-style: italic; }
 
+  #work, #process {
+    background-image:
+      linear-gradient(rgba(47, 99, 150, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(47, 99, 150, 0.045) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
   ul.principles { list-style: none; }
-  .principles li { padding: 26px 0 26px 52px; position: relative; max-width: 58ch; color: var(--muted); font-size: 0.95em; line-height: 1.7; }
+  .principles li { padding: 26px 0 26px 60px; position: relative; max-width: 58ch; color: var(--muted); font-size: 0.95em; line-height: 1.7; }
   .principles li + li { border-top: 1px solid var(--hairline); }
   .principles li::before {
     content: attr(data-n);
     font-family: "DM Mono", ui-monospace, Consolas, monospace;
     font-size: 12px; color: var(--gold);
-    position: absolute; left: 0; top: 36px;
+    position: absolute; left: 0; top: 32px;
+    width: 34px; height: 34px; line-height: 34px; text-align: center;
+    border: 1px solid var(--gold-soft); border-radius: 50%;
+    background: var(--gold-wash);
   }
   .principles strong { display: block; font-weight: 600; color: var(--ink); font-size: var(--step-2); line-height: 1.25; margin-bottom: 6px; }
 
@@ -197,35 +237,80 @@
     transition: border-color 180ms ease;
   }
   .step:hover { border-color: var(--gold-soft); }
+  .step::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--gold-soft), rgba(123, 167, 205, 0.5) 60%, transparent);
+  }
   .step-n { font-size: 12px; color: var(--gold); letter-spacing: 0.1em; display: block; margin-bottom: 10px; }
   .step h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 6px; }
   .step p { font-size: 0.95em; color: var(--muted); line-height: 1.55; }
 
-  .quote { border-top: 1px solid var(--hairline); padding: calc(var(--space-section) * 0.7) 0; background: var(--gold-wash); }
-  .quote blockquote { max-width: 34ch; margin: 0 auto; text-align: center; font-size: var(--step-2); font-style: italic; line-height: 1.45; }
-  .quote blockquote em { color: var(--gold); }
+  .quote {
+    padding: calc(var(--space-section) * 0.8) 0;
+    background: var(--bp);
+    position: relative; overflow: hidden;
+  }
+  .quote::before {
+    content: ""; position: absolute; inset: 0;
+    background-image:
+      radial-gradient(ellipse 60% 90% at 50% 50%, rgba(20, 74, 119, 0.55), transparent 100%),
+      linear-gradient(rgba(169, 206, 233, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(169, 206, 233, 0.06) 1px, transparent 1px);
+    background-size: auto, 56px 56px, 56px 56px;
+  }
+  .quote .wrap { position: relative; }
+  .q-label {
+    display: block; text-align: center;
+    font-family: "DM Mono", ui-monospace, Consolas, monospace;
+    font-size: 11px; letter-spacing: 0.28em; color: var(--blue-soft);
+    margin-bottom: 22px;
+  }
+  .q-label::after { content: ""; display: block; width: 32px; height: 1px; background: #d8b46a; margin: 14px auto 0; }
+  .quote blockquote { max-width: 34ch; margin: 0 auto; text-align: center; font-size: var(--step-2); font-style: italic; line-height: 1.45; color: #eef5fb; }
+  .quote blockquote em { color: #d8b46a; }
+  .quote ::selection { background: #d8b46a; color: var(--bp); }
 
   .who p { max-width: 60ch; }
 
-  .contact p { max-width: 56ch; margin-bottom: 28px; }
+  .contact {
+    background: var(--bp);
+    border-top: none;
+    position: relative; overflow: hidden;
+  }
+  .contact::before {
+    content: ""; position: absolute; inset: 0;
+    background-image:
+      radial-gradient(ellipse 70% 90% at 30% 40%, rgba(20, 74, 119, 0.5), transparent 100%),
+      linear-gradient(rgba(169, 206, 233, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(169, 206, 233, 0.06) 1px, transparent 1px);
+    background-size: auto, 56px 56px, 56px 56px;
+  }
+  .contact .wrap { position: relative; }
+  .contact h2 { color: #f0f6fc; }
+  .contact .sec-num { color: #d8b46a; }
+  .contact .sec-num::after { background: #d8b46a; }
+  .contact p { max-width: 56ch; margin-bottom: 28px; color: #b9cfe3; }
+  .contact ::selection { background: #d8b46a; color: var(--bp); }
   .contact .email {
     font-family: "DM Mono", ui-monospace, Consolas, monospace;
     font-size: clamp(1rem, 0.9rem + 1vw, 1.35rem);
     letter-spacing: 0.04em;
     display: inline-block;
-    background: var(--paper-2);
-    border: 1px solid var(--hairline);
+    color: #d8b46a;
+    background: rgba(10, 44, 78, 0.6);
+    border: 1px solid rgba(169, 206, 233, 0.3);
     border-radius: 3px;
     padding: 14px 22px;
     transition: box-shadow 180ms ease, border-color 180ms ease;
   }
-  .contact .email:hover { box-shadow: var(--shadow); border-color: var(--gold-soft); }
+  .contact .email:hover { border-color: #d8b46a; box-shadow: 0 0 28px rgba(216, 180, 106, 0.18); }
 
-  footer { border-top: 1px solid var(--hairline); padding: 40px 0 72px; background: var(--paper-2); }
+  footer { border-top: 1px solid rgba(169, 206, 233, 0.16); padding: 40px 0 72px; background: var(--bp-2); }
   footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; align-items: baseline; }
-  footer, footer a { font-size: 12px; letter-spacing: 0.06em; color: var(--muted); }
+  footer, footer a { font-size: 12px; letter-spacing: 0.06em; color: #7fa3c4; }
   footer a { border-bottom-color: transparent; }
-  footer a:hover { color: var(--gold); border-bottom-color: rgba(128,100,40,0.35); }
+  footer a:hover { color: #d8b46a; border-bottom-color: rgba(216, 180, 106, 0.4); }
+  footer ::selection { background: #d8b46a; color: var(--bp); }
 
   .reveal { opacity: 0; transform: translateY(14px); transition: opacity 600ms ease, transform 600ms ease; }
   .reveal.in { opacity: 1; transform: none; }
@@ -633,6 +718,7 @@
           <svg class="icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M12 18 L24 10 L36 18 L24 26 Z"/><path d="M12 18 V32 L24 40 V26"/><path d="M36 18 V32 L24 40"/></svg>
           <h3>Production &amp; scheduling system for a modular manufacturer</h3>
         </div>
+        <span class="sht" aria-hidden="true">SHT 002</span>
         <p>A 15-station line was scheduled in spreadsheets. The system we built now plans capacity, advances modules from the shop floor, and tracks each one by QR code to the job site.</p>
         <span class="tag">Manufacturing · Scheduling · Field tracking</span>
       </div>
@@ -641,14 +727,16 @@
           <svg class="icon" viewBox="0 0 48 48" aria-hidden="true"><rect x="10" y="8" width="28" height="32"/><path d="M16 33 L31 33 L16 18 Z"/></svg>
           <h3>Estimating platform replacing a spreadsheet workflow</h3>
         </div>
+        <span class="sht" aria-hidden="true">SHT 003</span>
         <p>Every bid was rebuilt by hand in Excel. Our versioned estimating engine goes from drawings to bill of materials to client-ready proposal — validated against the company's own historical bids.</p>
-        <span class="tag">Estimating · BOM · Proposals</span>
+        <span class="tag tag--blue">Estimating · BOM · Proposals</span>
       </div>
       <div class="work-item reveal">
         <div class="work-head">
           <svg class="icon" viewBox="0 0 48 48" aria-hidden="true"><rect x="10" y="8" width="28" height="32"/><path d="M16 16 H32"/><path d="M16 22 H32"/><path d="M16 28 H26"/><path d="M17 34 L20 37 L27 30"/></svg>
           <h3>Month-end close and job-cost automation for a construction group</h3>
         </div>
+        <span class="sht" aria-hidden="true">SHT 004</span>
         <p>Month-end close ran on weeks of manual journal entries. We automated WIP schedules, payroll allocations, and owner billing against the existing ERP — matching the controller's exact postings.</p>
         <span class="tag">Accounting · ERP integration · Automation</span>
       </div>
@@ -659,6 +747,7 @@
 
 <div class="quote reveal">
   <div class="wrap">
+    <span class="q-label">FIELD NOTE · 001</span>
     <blockquote>Design the system around the company — <em>not the company around the system</em>.</blockquote>
   </div>
 </div>
@@ -667,9 +756,9 @@
   <div class="wrap sec-grid">
     <div class="sec-label reveal"><span class="sec-num">03</span><h2>How we work</h2></div>
     <ul class="principles">
-      <li class="reveal" data-n="i."><strong>Fixed scope, in writing.</strong> A signed MSA and SOW — you know the deliverables and the price before we start.</li>
-      <li class="reveal" data-n="ii."><strong>Your IP, on payment.</strong> Deliverable IP assigns to you when the invoice is paid. No lock-in, no licensing tail.</li>
-      <li class="reveal" data-n="iii."><strong>Working software over decks.</strong> Short feedback loops and something you can use — not a slide about it.</li>
+      <li class="reveal" data-n="i"><strong>Fixed scope, in writing.</strong> A signed MSA and SOW — you know the deliverables and the price before we start.</li>
+      <li class="reveal" data-n="ii"><strong>Your IP, on payment.</strong> Deliverable IP assigns to you when the invoice is paid. No lock-in, no licensing tail.</li>
+      <li class="reveal" data-n="iii"><strong>Working software over decks.</strong> Short feedback loops and something you can use — not a slide about it.</li>
     </ul>
   </div>
 </section>
