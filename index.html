@@ -26,7 +26,8 @@
   "description": "Management consulting and custom application development for operating businesses.",
   "areaServed": "California",
   "email": "contact@mlienterprises.com",
-  "url": "https://mlienterprises.vercel.app/"
+  "url": "https://mlienterprises.vercel.app/",
+  "founder": { "@type": "Person", "name": "Michael Li", "url": "https://michaelli.co" }
 }
 </script>
 <style>
@@ -229,6 +230,20 @@
   .work-item .tag--blue { color: var(--blue); background: var(--blue-wash); }
   .work-note { margin-top: 26px; font-size: 0.92em; color: var(--faint); font-style: italic; }
 
+  .est-visual { margin: 24px 0 0; }
+  .est-visual svg {
+    display: block; width: 100%; height: auto;
+    border-radius: 4px;
+    border: 1px solid rgba(47, 99, 150, 0.35);
+    box-shadow: var(--shadow);
+  }
+  .est-visual text { font-family: "DM Mono", ui-monospace, Consolas, monospace; }
+  .est-visual figcaption {
+    font-family: "DM Mono", ui-monospace, Consolas, monospace;
+    font-size: 12px; letter-spacing: 0.14em; color: var(--faint);
+    margin-top: 12px;
+  }
+
   #work, #process {
     background-image:
       linear-gradient(rgba(47, 99, 150, 0.045) 1px, transparent 1px),
@@ -298,6 +313,44 @@
   .quote ::selection { background: #d8b46a; color: var(--bp); }
 
   .who p { max-width: 60ch; }
+  .who-grid { display: grid; grid-template-columns: 1fr 300px; gap: clamp(32px, 4vw, 64px); align-items: start; }
+  .who-name { font-size: var(--step-2); font-weight: 600; line-height: 1.2; }
+  .who-role {
+    font-family: "DM Mono", ui-monospace, Consolas, monospace;
+    font-size: 13px; letter-spacing: 0.2em; color: var(--blue);
+    margin: 8px 0 22px;
+  }
+  .who-grid p + p { margin-top: 18px; }
+  .who-thesis {
+    margin: 26px 0 0; padding: 20px 24px;
+    border-left: 3px solid var(--gold-soft);
+    background: var(--gold-wash);
+    font-style: italic; font-size: 1.05em; line-height: 1.6;
+  }
+  .who-thesis .src { display: block; margin-top: 10px; font-style: normal; font-size: 0.85em; }
+  .who-portrait { margin: 0; }
+  .who-portrait .frame {
+    position: relative;
+    border: 1px solid var(--gold-soft);
+    background: var(--paper-2);
+    padding: 10px;
+    box-shadow: var(--shadow);
+  }
+  .who-portrait .frame::after {
+    content: ""; position: absolute; inset: 0; z-index: -1;
+    border: 1px solid rgba(47, 99, 150, 0.35);
+    transform: translate(12px, 12px);
+  }
+  .who-portrait img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; object-position: center top; }
+  .who-portrait figcaption {
+    font-family: "DM Mono", ui-monospace, Consolas, monospace;
+    font-size: 12px; letter-spacing: 0.18em; color: var(--gold);
+    margin-top: 14px; text-align: right;
+  }
+  @media (max-width: 760px) {
+    .who-grid { grid-template-columns: 1fr; }
+    .who-portrait { max-width: 300px; order: -1; }
+  }
 
   .contact {
     background: var(--bp);
@@ -754,6 +807,99 @@
         </div>
         <span class="sht" aria-hidden="true">SHT 003</span>
         <p>Every bid was rebuilt by hand in Excel. Our versioned estimating engine goes from drawings to bill of materials to client-ready proposal — validated against the company's own historical bids.</p>
+        <figure class="est-visual">
+          <svg viewBox="0 0 1000 440" xmlns="http://www.w3.org/2000/svg" fill="none" role="img" aria-label="Estimating software panel: 3D building takeoff and a regression of model estimates against historical bids">
+            <defs>
+              <pattern id="est-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M40 0 H0 V40" stroke="#a9cee9" stroke-width="0.5" opacity="0.06"/>
+              </pattern>
+            </defs>
+            <rect width="1000" height="440" fill="#0c3357"/>
+            <rect width="1000" height="440" fill="url(#est-grid)"/>
+            <!-- window chrome -->
+            <rect width="1000" height="36" fill="#0a2c4e"/>
+            <circle cx="22" cy="18" r="5" fill="#a9cee9" opacity="0.25"/>
+            <circle cx="42" cy="18" r="5" fill="#a9cee9" opacity="0.25"/>
+            <circle cx="62" cy="18" r="5" fill="#a9cee9" opacity="0.25"/>
+            <text x="86" y="23" font-size="11" fill="#a9cee9" opacity="0.7" letter-spacing="2">LI-OS · ESTIMATING — TAKEOFF &amp; BID REGRESSION</text>
+            <text x="978" y="23" text-anchor="end" font-size="11" fill="#d8b46a" opacity="0.85" letter-spacing="2">EST 2481 · REV C</text>
+            <path d="M490 56 V378" stroke="#a9cee9" stroke-width="1" opacity="0.15"/>
+
+            <!-- 3D takeoff: isometric modular building -->
+            <g stroke="#a9cee9" stroke-width="1.25" opacity="0.85">
+              <path d="M250 340 L389 260 M250 340 L172 295 M250 340 L250 190 M389 260 L389 110 M172 295 L172 145 M250 190 L389 110 M250 190 L172 145 M389 110 L311 65 M172 145 L311 65"/>
+            </g>
+            <g stroke="#a9cee9" stroke-width="1" opacity="0.28" stroke-dasharray="5 4">
+              <path d="M172 295 L311 215 M389 260 L311 215 M311 215 L311 65"/>
+            </g>
+            <!-- floor lines -->
+            <g stroke="#a9cee9" stroke-width="0.75" opacity="0.4">
+              <path d="M250 290 L389 210 M250 240 L389 160"/>
+              <path d="M250 290 L172 245 M250 240 L172 195"/>
+            </g>
+            <!-- windows, right face -->
+            <g stroke="#a9cee9" stroke-width="0.75" opacity="0.4">
+              <path d="M264 317 l18 -10 l0 -20 l-18 10 z M297 298 l18 -10 l0 -20 l-18 10 z M331 279 l18 -10 l0 -20 l-18 10 z M364 259 l18 -10 l0 -20 l-18 10 z"/>
+              <path d="M264 267 l18 -10 l0 -20 l-18 10 z M297 248 l18 -10 l0 -20 l-18 10 z M364 209 l18 -10 l0 -20 l-18 10 z"/>
+              <path d="M264 217 l18 -10 l0 -20 l-18 10 z M297 198 l18 -10 l0 -20 l-18 10 z M331 179 l18 -10 l0 -20 l-18 10 z M364 159 l18 -10 l0 -20 l-18 10 z"/>
+            </g>
+            <!-- selected module -->
+            <path d="M331 229 l18 -10 l0 -20 l-18 10 z" fill="#d8b46a" fill-opacity="0.35" stroke="#d8b46a" stroke-width="1.25"/>
+            <path d="M287 116 L334 206" stroke="#d8b46a" stroke-width="0.75" stroke-dasharray="4 4" opacity="0.8"/>
+            <text x="170" y="110" font-size="11" fill="#d8b46a" letter-spacing="1.5">MOD 12 · SELECTED</text>
+            <!-- windows, left face -->
+            <g stroke="#a9cee9" stroke-width="0.75" opacity="0.3">
+              <path d="M230 314 l-16 -9 l0 -20 l16 9 z M199 296 l-16 -9 l0 -20 l16 9 z"/>
+              <path d="M230 264 l-16 -9 l0 -20 l16 9 z M199 246 l-16 -9 l0 -20 l16 9 z"/>
+              <path d="M230 214 l-16 -9 l0 -20 l16 9 z M199 196 l-16 -9 l0 -20 l16 9 z"/>
+            </g>
+            <!-- dimensions -->
+            <g stroke="#cfe3f4" stroke-width="0.75" opacity="0.6">
+              <path d="M264 364 L403 284"/>
+              <path d="M258 356 L270 372 M397 276 L409 292"/>
+              <path d="M236 364 L158 319"/>
+              <path d="M242 356 L230 372 M164 311 L152 327"/>
+              <path d="M407 260 L407 110"/>
+              <path d="M399 260 L415 260 M399 110 L415 110"/>
+            </g>
+            <text x="333" y="338" font-size="11" fill="#cfe3f4" opacity="0.75" letter-spacing="1" transform="rotate(-29.9 333 338)">84′-0″</text>
+            <text x="186" y="356" font-size="11" fill="#cfe3f4" opacity="0.75" letter-spacing="1" transform="rotate(30 186 356)">36′-0″</text>
+            <text x="419" y="189" font-size="11" fill="#cfe3f4" opacity="0.75" letter-spacing="1" transform="rotate(-90 419 189)">38′-0″</text>
+
+            <!-- regression: model estimate vs historical bids -->
+            <text x="540" y="78" font-size="11" fill="#a9cee9" opacity="0.75" letter-spacing="1.5">HISTORICAL BIDS · N = 214</text>
+            <text x="940" y="78" text-anchor="end" font-size="11" fill="#d8b46a" letter-spacing="1.5">R² = 0.94</text>
+            <g stroke="#a9cee9" stroke-width="0.5" opacity="0.12">
+              <path d="M620 90 V350 M700 90 V350 M780 90 V350 M860 90 V350"/>
+              <path d="M540 155 H940 M540 220 H940 M540 285 H940"/>
+            </g>
+            <path d="M540 90 V350 H940" stroke="#a9cee9" stroke-width="1" opacity="0.5"/>
+            <polygon points="548,352 932,158 932,118 548,320" fill="#d8b46a" opacity="0.08"/>
+            <path d="M548 336 L932 138" stroke="#d8b46a" stroke-width="1.75"/>
+            <g fill="#a9cee9" opacity="0.8">
+              <circle cx="560" cy="332" r="3.5"/><circle cx="585" cy="318" r="3.5"/><circle cx="600" cy="308" r="3.5"/><circle cx="618" cy="314" r="3.5"/><circle cx="640" cy="296" r="3.5"/><circle cx="662" cy="288" r="3.5"/><circle cx="680" cy="270" r="3.5"/><circle cx="700" cy="278" r="3.5"/><circle cx="722" cy="258" r="3.5"/><circle cx="748" cy="246" r="3.5"/><circle cx="770" cy="232" r="3.5"/><circle cx="795" cy="240" r="3.5"/><circle cx="812" cy="214" r="3.5"/><circle cx="840" cy="200" r="3.5"/><circle cx="868" cy="186" r="3.5"/><circle cx="895" cy="168" r="3.5"/><circle cx="918" cy="152" r="3.5"/><circle cx="702" cy="225" r="3.5"/><circle cx="822" cy="252" r="3.5"/>
+            </g>
+            <circle cx="852" cy="178" r="4" fill="#d8b46a"/>
+            <circle cx="852" cy="178" r="9" stroke="#d8b46a" stroke-width="1.5"/>
+            <rect x="742" y="128" width="152" height="24" rx="2" fill="#0a2c4e" stroke="#d8b46a" stroke-width="0.75"/>
+            <text x="754" y="144" font-size="11" fill="#d8b46a" letter-spacing="1">THIS BID · +2.6%</text>
+            <path d="M846 152 L852 169" stroke="#d8b46a" stroke-width="0.75" opacity="0.8"/>
+            <text x="740" y="382" text-anchor="middle" font-size="10" fill="#a9cee9" opacity="0.6" letter-spacing="1.5">MODEL ESTIMATE →</text>
+            <text x="528" y="220" font-size="10" fill="#a9cee9" opacity="0.6" letter-spacing="1.5" transform="rotate(-90 528 220)">BID VALUE →</text>
+
+            <!-- footer chips -->
+            <g>
+              <rect x="60" y="398" width="178" height="26" rx="2" fill="#0a2c4e" stroke="#a9cee9" stroke-opacity="0.3" stroke-width="0.75"/>
+              <text x="74" y="415" font-size="11" fill="#a9cee9" opacity="0.8" letter-spacing="1">BOM · 1,284 LINES</text>
+              <rect x="252" y="398" width="140" height="26" rx="2" fill="#0a2c4e" stroke="#a9cee9" stroke-opacity="0.3" stroke-width="0.75"/>
+              <text x="266" y="415" font-size="11" fill="#a9cee9" opacity="0.8" letter-spacing="1">PROPOSAL V3</text>
+              <rect x="416" y="398" width="230" height="26" rx="2" fill="#0a2c4e" stroke="#d8b46a" stroke-opacity="0.5" stroke-width="0.75"/>
+              <text x="430" y="415" font-size="11" fill="#d8b46a" opacity="0.9" letter-spacing="1">VALIDATED VS HISTORY</text>
+            </g>
+            <text x="940" y="415" text-anchor="end" font-size="10" fill="#a9cee9" opacity="0.45" letter-spacing="1.5">ILLUSTRATIVE · NO CLIENT DATA</text>
+          </svg>
+          <figcaption>THE ESTIMATING ENGINE — 3D TAKEOFF, THEN EVERY BID CHECKED AGAINST THE REGRESSION OF PAST WORK</figcaption>
+        </figure>
         <span class="tag tag--blue">Estimating · BOM · Proposals</span>
       </div>
       <div class="work-item reveal">
@@ -823,8 +969,21 @@
 <section class="who" id="who">
   <div class="wrap sec-grid">
     <div class="sec-label reveal"><span class="sec-num">05</span><h2>Who</h2></div>
-    <div class="reveal">
-      <p>MLI Enterprises grew out of operating roles in modular construction and manufacturing. The practice began as software built to run those businesses — scheduling, estimating, and accounting systems used daily on factory floors and job sites. The firm works in English and Mandarin, from California.</p>
+    <div class="who-grid reveal">
+      <div>
+        <h3 class="who-name">Michael Li</h3>
+        <p class="who-role">FOUNDER · OPERATOR · BUILDER</p>
+        <p>Michael has spent his career inside operating businesses — most recently in operating roles across modular construction and manufacturing, including two years inside a modular manufacturer acquired out of bankruptcy, leading its financial restructuring and rebuilding the systems underneath it. Before that, his background spans institutional investing, acquisitions, and family-office capital.</p>
+        <p>The development practice began as software he built to run those businesses — production scheduling, estimating, and accounting systems used daily on factory floors and job sites. He studied Economics and Technology Management at UC Santa Barbara, works in English and Mandarin, and is based in California.</p>
+        <blockquote class="who-thesis">
+          "Shape the OS around the company — not the company around the OS."
+          <span class="src">From his design thesis, Li-OS — <a href="https://michaelli.co/li-os">read it at michaelli.co</a></span>
+        </blockquote>
+      </div>
+      <figure class="who-portrait">
+        <div class="frame"><img src="portrait.jpg" alt="Michael Li, founder of MLI Enterprises" width="800" height="1067" loading="lazy"></div>
+        <figcaption>MICHAEL LI · CALIFORNIA</figcaption>
+      </figure>
     </div>
   </div>
 </section>
