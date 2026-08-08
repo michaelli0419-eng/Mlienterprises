@@ -110,7 +110,8 @@
   .hero h1 em { font-style: italic; color: var(--gold); }
   .hero p.sub { margin-top: 28px; max-width: 52ch; color: var(--muted); }
   .hero-figure { margin-top: clamp(2.5rem, 2rem + 3vw, 4.5rem); }
-  .hero-figure svg { display: block; width: 100%; max-width: 620px; height: auto; }
+  .hero-figure svg { display: block; width: 100%; height: auto; }
+  .hero-figure text { font-family: "DM Mono", ui-monospace, Consolas, monospace; }
 
   section { border-top: 1px solid var(--hairline); padding: var(--space-section) 0; }
   .sec-grid { display: grid; grid-template-columns: 220px 1fr; gap: 40px; }
@@ -237,33 +238,93 @@
     <h1>Management consulting and custom application development for <em>operating businesses</em>.</h1>
     <p class="sub">Software shaped to how your company actually works — built by people who have run the operations it serves.</p>
     <div class="hero-figure" aria-hidden="true">
-      <svg viewBox="0 0 560 120" xmlns="http://www.w3.org/2000/svg" fill="none">
-        <g stroke="#806428" stroke-width="1" opacity="0.55">
-          <rect x="0.5" y="40.5" width="80" height="79"/>
-          <rect x="80.5" y="40.5" width="80" height="79"/>
-          <rect x="160.5" y="40.5" width="80" height="79"/>
-          <rect x="240.5" y="40.5" width="80" height="79"/>
-          <rect x="320.5" y="40.5" width="80" height="79"/>
-          <rect x="400.5" y="40.5" width="80" height="79"/>
-          <rect x="480.5" y="40.5" width="79" height="79"/>
-          <path d="M0.5 40.5 L28.5 12.5 H587"/>
-          <path d="M80.5 40.5 L108.5 12.5"/>
-          <path d="M160.5 40.5 L188.5 12.5"/>
-          <path d="M240.5 40.5 L268.5 12.5"/>
-          <path d="M320.5 40.5 L348.5 12.5"/>
-          <path d="M400.5 40.5 L428.5 12.5"/>
-          <path d="M480.5 40.5 L508.5 12.5"/>
+      <svg viewBox="0 0 900 340" xmlns="http://www.w3.org/2000/svg" fill="none">
+        <defs>
+          <clipPath id="sheet"><rect x="9" y="9" width="882" height="322"/></clipPath>
+        </defs>
+
+        <!-- drawing sheet frame -->
+        <rect x="0.5" y="0.5" width="899" height="339" stroke="#806428" stroke-width="1" opacity="0.35"/>
+        <rect x="8.5" y="8.5" width="883" height="323" stroke="#806428" stroke-width="1" opacity="0.2"/>
+
+        <g clip-path="url(#sheet)">
+          <!-- angled downtown grid -->
+          <g stroke="#806428" stroke-width="1" opacity="0.28" transform="rotate(-20 220 170)">
+            <path d="M40 -60 V400"/><path d="M85 -60 V400"/><path d="M130 -60 V400"/><path d="M175 -60 V400"/><path d="M220 -60 V400"/><path d="M265 -60 V400"/><path d="M310 -60 V400"/><path d="M355 -60 V400"/><path d="M400 -60 V400"/>
+            <path d="M-80 0 H480"/><path d="M-80 45 H480"/><path d="M-80 90 H480"/><path d="M-80 135 H480"/><path d="M-80 180 H480"/><path d="M-80 225 H480"/><path d="M-80 270 H480"/><path d="M-80 315 H480"/>
+          </g>
+          <!-- filled blocks in the old grid -->
+          <g fill="#806428" opacity="0.07" transform="rotate(-20 220 170)">
+            <rect x="130" y="90" width="45" height="45"/>
+            <rect x="220" y="135" width="45" height="45"/>
+            <rect x="85" y="180" width="45" height="45"/>
+            <rect x="265" y="45" width="45" height="45"/>
+          </g>
+
+          <!-- orthogonal grid, east of the seam -->
+          <g stroke="#806428" stroke-width="1" opacity="0.2">
+            <path d="M480 9 V331"/><path d="M530 9 V331"/><path d="M580 9 V331"/><path d="M630 9 V331"/><path d="M680 9 V331"/><path d="M730 9 V331"/><path d="M780 9 V331"/><path d="M830 9 V331"/>
+            <path d="M480 60 H891"/><path d="M480 110 H891"/><path d="M480 160 H891"/><path d="M480 210 H891"/><path d="M480 260 H891"/><path d="M480 310 H891"/>
+          </g>
+
+          <!-- boulevard cutting diagonally -->
+          <g stroke="#806428" stroke-width="1" opacity="0.45">
+            <path d="M14 296 L886 64"/>
+            <path d="M18 306 L890 74"/>
+          </g>
+
+          <!-- freeway sweep with interchange -->
+          <g stroke="#806428" stroke-width="1" opacity="0.38">
+            <path d="M420 336 C 424 240, 520 208, 636 196 C 752 184, 816 120, 826 14"/>
+            <path d="M432 336 C 436 248, 528 218, 640 206 C 756 194, 828 126, 838 14"/>
+            <circle cx="642" cy="201" r="16"/>
+          </g>
+
+          <!-- river along the east edge -->
+          <g stroke="#806428" stroke-width="1" opacity="0.28">
+            <path d="M868 332 L858 280 L874 220 L862 160 L878 100 L870 42 L876 12"/>
+            <path d="M878 332 L868 282 L884 222 L872 162 L888 102 L880 44 L886 12"/>
+          </g>
+
+          <!-- park with hatch -->
+          <g stroke="#806428" opacity="0.32">
+            <rect x="520" y="228" width="92" height="58" stroke-width="1"/>
+            <path d="M528 286 L578 228 M548 286 L598 228 M568 286 L612 236 M520 274 L560 228" stroke-width="0.75" opacity="0.7"/>
+          </g>
+
+          <!-- plazas -->
+          <g stroke="#806428" stroke-width="1" opacity="0.4">
+            <circle cx="300" cy="150" r="10"/>
+            <circle cx="300" cy="150" r="3"/>
+            <circle cx="180" cy="226" r="7"/>
+          </g>
+
+          <!-- dimension line -->
+          <g stroke="#806428" stroke-width="1" opacity="0.45">
+            <path d="M40 26 H400"/>
+            <path d="M40 20 V32"/>
+            <path d="M400 20 V32"/>
+          </g>
+          <text x="212" y="22" text-anchor="middle" font-size="9" fill="#806428" opacity="0.7" letter-spacing="1.5">5,280 FT</text>
+
+          <!-- north arrow -->
+          <g stroke="#806428" stroke-width="1" opacity="0.5">
+            <circle cx="58" cy="64" r="15"/>
+            <path d="M58 74 L58 56"/>
+            <path d="M52 61 L58 52 L64 61"/>
+          </g>
+          <text x="58" y="94" text-anchor="middle" font-size="8" fill="#806428" opacity="0.6" letter-spacing="2">N</text>
         </g>
-        <g stroke="#806428" stroke-width="1" opacity="0.2">
-          <path d="M0.5 80 H559.5"/>
-          <path d="M40.5 40.5 V119.5"/>
-          <path d="M120.5 40.5 V119.5"/>
-          <path d="M200.5 40.5 V119.5"/>
-          <path d="M280.5 40.5 V119.5"/>
-          <path d="M360.5 40.5 V119.5"/>
-          <path d="M440.5 40.5 V119.5"/>
-          <path d="M520.5 40.5 V119.5"/>
+
+        <!-- title block -->
+        <g stroke="#806428" stroke-width="1" opacity="0.35">
+          <rect x="668" y="288" width="223" height="43"/>
+          <path d="M668 302 H891"/>
+          <path d="M668 316 H891"/>
         </g>
+        <text x="676" y="298.5" font-size="8" fill="#806428" opacity="0.75" letter-spacing="1.5">MLI ENTERPRISES — DRAWN FOR THE OPERATOR</text>
+        <text x="676" y="312.5" font-size="8" fill="#806428" opacity="0.65" letter-spacing="1.5">PLAN OF LOS ANGELES · SHEET 001</text>
+        <text x="676" y="326.5" font-size="8" fill="#806428" opacity="0.65" letter-spacing="1.5">SCALE 1:5000 · REV A</text>
       </svg>
     </div>
   </div>
