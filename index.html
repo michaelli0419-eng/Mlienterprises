@@ -101,9 +101,25 @@
     display: flex;
     align-items: center;
   }
-  .hero-bg { position: absolute; inset: 0; }
-  .hero-bg svg { display: block; width: 100%; height: 100%; }
+  .hero-bg { position: absolute; inset: 0; overflow: hidden; }
+  .hero-bg svg { display: block; width: 100%; height: 100%; transform: translate3d(var(--par-x, 0px), var(--par-y, 0px), 0) scale(1.05); will-change: transform; }
   .hero-bg text { font-family: "DM Mono", ui-monospace, Consolas, monospace; }
+
+  /* street lamp: brightens the linework under the cursor */
+  .hero-lamp { position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity 500ms ease; }
+  .hero.lit .hero-lamp { opacity: 1; }
+  .lamp-brighten {
+    position: absolute; inset: 0;
+    backdrop-filter: brightness(2) saturate(1.2);
+    -webkit-backdrop-filter: brightness(2) saturate(1.2);
+    -webkit-mask-image: radial-gradient(230px 230px at var(--mx, 50%) var(--my, 42%), #000 0%, rgba(0,0,0,0.55) 45%, transparent 72%);
+    mask-image: radial-gradient(230px 230px at var(--mx, 50%) var(--my, 42%), #000 0%, rgba(0,0,0,0.55) 45%, transparent 72%);
+  }
+  .lamp-glow {
+    position: absolute; inset: 0;
+    background: radial-gradient(340px 340px at var(--mx, 50%) var(--my, 42%), rgba(140, 200, 255, 0.14), rgba(140, 200, 255, 0.04) 45%, transparent 70%);
+    mix-blend-mode: screen;
+  }
   .hero-bg::after {
     content: "";
     position: absolute; inset: 0;
@@ -142,10 +158,18 @@
     border: 1px solid var(--hairline);
     border-radius: 3px;
     padding: 30px 32px;
-    transition: box-shadow 180ms ease, transform 180ms ease;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 180ms ease, transform 180ms ease, border-color 180ms ease;
   }
   .work-item + .work-item { margin-top: 20px; }
-  .work-item:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+  .work-item:hover { box-shadow: var(--shadow); transform: translateY(-2px); border-color: var(--gold-soft); }
+  .work-item::after, .step::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    opacity: 0; transition: opacity 260ms ease;
+    background: radial-gradient(240px circle at var(--cx, 50%) var(--cy, 50%), rgba(184, 154, 90, 0.15), transparent 65%);
+  }
+  .work-item:hover::after, .step:hover::after { opacity: 1; }
   .work-item h3 { font-size: var(--step-2); font-weight: 600; line-height: 1.35; margin-bottom: 8px; }
   .work-item p { max-width: 60ch; }
   .work-item .tag { display: inline-block; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); background: var(--gold-wash); padding: 5px 10px; border-radius: 2px; margin-top: 16px; }
@@ -169,7 +193,10 @@
     border-radius: 3px;
     padding: 22px 20px;
     position: relative;
+    overflow: hidden;
+    transition: border-color 180ms ease;
   }
+  .step:hover { border-color: var(--gold-soft); }
   .step-n { font-size: 12px; color: var(--gold); letter-spacing: 0.1em; display: block; margin-bottom: 10px; }
   .step h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 6px; }
   .step p { font-size: 0.95em; color: var(--muted); line-height: 1.55; }
@@ -202,10 +229,46 @@
 
   .reveal { opacity: 0; transform: translateY(14px); transition: opacity 600ms ease, transform 600ms ease; }
   .reveal.in { opacity: 1; transform: none; }
+
+  /* AI reading of the sheet: beam sweep + cycling highlight targets */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero h1 em {
+      background-image: linear-gradient(rgba(216, 180, 106, 0.24), rgba(216, 180, 106, 0.24));
+      background-repeat: no-repeat;
+      background-size: 0% 70%;
+      background-position: 0 88%;
+      animation: claim-hi 900ms ease-out 1100ms forwards;
+    }
+    .scan-beam { animation: beam 22s linear infinite; }
+    .scan-t { opacity: 0; animation: scan-slot 22s linear infinite; }
+    .scan-t.t2 { animation-delay: 5.5s; }
+    .scan-t.t3 { animation-delay: 11s; }
+    .scan-t.t4 { animation-delay: 16.5s; }
+    .scan-sweep { transform: scaleX(0); transform-box: fill-box; transform-origin: left center; animation: scan-sweep 22s linear infinite; animation-delay: inherit; }
+    .scan-box { transform-box: fill-box; transform-origin: center; animation: scan-box 22s linear infinite; animation-delay: inherit; }
+    .scan-dot { animation: scan-dot 1.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+  }
+  @keyframes claim-hi { to { background-size: 100% 70%; } }
+  @keyframes beam { from { transform: translateX(0); } to { transform: translateX(1620px); } }
+  @keyframes scan-slot {
+    0% { opacity: 0; } 2% { opacity: 1; } 21% { opacity: 1; } 24.5% { opacity: 0; } 100% { opacity: 0; }
+  }
+  @keyframes scan-sweep {
+    0%, 2% { transform: scaleX(0); } 8.5% { transform: scaleX(1); } 24% { transform: scaleX(1); } 24.5%, 100% { transform: scaleX(0); }
+  }
+  @keyframes scan-box {
+    0% { transform: scale(1.14); } 2% { transform: scale(1.14); } 6% { transform: scale(1); } 100% { transform: scale(1); }
+  }
+  @keyframes scan-dot {
+    0%, 100% { transform: scale(1); opacity: 0.9; } 50% { transform: scale(1.7); opacity: 0.4; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .reveal { opacity: 1; transform: none; transition: none; }
     .work-item, .work-item:hover { transform: none; }
+    .hero-lamp, .work-item::after, .step::after { display: none; }
+    .hero-bg svg { transform: none; }
   }
 
   @media (max-width: 900px) {
@@ -255,6 +318,11 @@
         <pattern id="grid-maj" width="120" height="120" patternUnits="userSpaceOnUse">
           <path d="M120 0 H0 V120" stroke="#a9cee9" stroke-width="0.7" opacity="0.16"/>
         </pattern>
+        <linearGradient id="beam-g" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#8fd0ff" stop-opacity="0"/>
+          <stop offset="0.82" stop-color="#8fd0ff" stop-opacity="0.05"/>
+          <stop offset="1" stop-color="#8fd0ff" stop-opacity="0.2"/>
+        </linearGradient>
         <clipPath id="sheet"><rect x="34" y="34" width="1372" height="742"/></clipPath>
       </defs>
 
@@ -293,6 +361,20 @@
         <g stroke="#a9cee9" stroke-width="0.5" opacity="0.16" stroke-dasharray="7 5" transform="rotate(-18 400 400)">
           <path d="M92 -80 V900 M220 -80 V900 M348 -80 V900 M476 -80 V900 M604 -80 V900"/>
           <path d="M-120 136 H820 M-120 264 H820 M-120 392 H820 M-120 520 H820 M-120 648 H820"/>
+        </g>
+        <!-- half-step side streets, finer mesh -->
+        <g stroke="#a9cee9" stroke-width="0.4" opacity="0.12" transform="rotate(-18 400 400)">
+          <path d="M156 -80 V900 M284 -80 V900 M412 -80 V900 M540 -80 V900 M668 -80 V900"/>
+          <path d="M-120 72 H820 M-120 200 H820 M-120 328 H820 M-120 456 H820 M-120 584 H820 M-120 712 H820"/>
+        </g>
+        <!-- foothill grid patch, its own rotation -->
+        <g stroke="#a9cee9" stroke-width="0.5" opacity="0.18" transform="rotate(7 620 150)">
+          <path d="M480 60 H800 M480 92 H800 M480 124 H800 M480 156 H800 M480 188 H800 M480 220 H800"/>
+          <path d="M520 30 V250 M560 30 V250 M600 30 V250 M640 30 V250 M680 30 V250 M720 30 V250 M760 30 V250"/>
+        </g>
+        <!-- radial avenues from the circle -->
+        <g stroke="#a9cee9" stroke-width="0.7" opacity="0.26">
+          <path d="M470 300 L590 190 M470 300 L620 330 M470 300 L560 430 M470 300 L360 420 M470 300 L330 220 M470 300 L430 160"/>
         </g>
         <!-- building footprints in the old grid -->
         <g fill="#a9cee9" opacity="0.1" transform="rotate(-18 400 400)">
@@ -337,6 +419,14 @@
           <circle cx="954" cy="549" r="26"/>
           <circle cx="954" cy="549" r="12"/>
         </g>
+        <!-- east-west freeway crossing it -->
+        <g stroke="#a9cee9" stroke-width="1" opacity="0.34">
+          <path d="M34 528 C 300 512, 620 500, 900 496 C 1100 493, 1280 484, 1406 470"/>
+          <path d="M34 542 C 300 526, 620 514, 900 510 C 1100 507, 1280 498, 1406 484"/>
+          <circle cx="878" cy="513" r="9" stroke-width="0.75"/>
+          <path d="M820 540 C 846 532, 862 524, 872 516" stroke-width="0.6"/>
+          <path d="M936 484 C 912 494, 896 502, 886 508" stroke-width="0.6"/>
+        </g>
 
         <!-- river along the east edge, banks hatched -->
         <g stroke="#a9cee9" stroke-width="1" opacity="0.3">
@@ -363,15 +453,31 @@
           <circle cx="1040" cy="258" r="9"/>
         </g>
 
-        <!-- contours, southwest corner -->
-        <g stroke="#a9cee9" stroke-width="0.75" opacity="0.24">
-          <path d="M34 560 C 120 552, 180 590, 210 660 C 232 712, 210 756, 170 776"/>
-          <path d="M34 596 C 104 590, 152 622, 178 678 C 196 718, 180 754, 148 776"/>
-          <path d="M34 632 C 88 628, 124 654, 146 696 C 160 726, 148 756, 124 776"/>
-          <path d="M34 668 C 72 666, 96 686, 112 714 C 122 734, 114 760, 98 776"/>
-          <path d="M34 704 C 56 704, 70 716, 80 734 C 86 748, 80 764, 70 776"/>
+        <!-- coastline and bay, southwest corner -->
+        <g stroke="#a9cee9" stroke-width="1.25" opacity="0.4">
+          <path d="M34 596 C 120 618, 196 668, 244 726 C 268 754, 282 766, 296 776"/>
         </g>
-        <text x="120" y="600" font-size="9" fill="#cfe3f4" opacity="0.45" letter-spacing="2" transform="rotate(24 120 600)">EL. 285 FT</text>
+        <g stroke="#a9cee9" stroke-width="0.6" opacity="0.22">
+          <path d="M30 636 C 100 656, 160 698, 204 748 C 218 764, 226 770, 234 776"/>
+          <path d="M28 676 C 84 694, 132 730, 168 770"/>
+          <path d="M26 716 C 68 730, 104 754, 128 776"/>
+          <path d="M24 754 C 48 762, 68 770, 80 776"/>
+        </g>
+        <!-- shoreline ticks -->
+        <g stroke="#a9cee9" stroke-width="0.6" opacity="0.3">
+          <path d="M76 606 L70 616 M120 620 L113 630 M162 640 L154 649 M200 666 L191 674 M232 696 L222 703 M258 728 L247 734"/>
+        </g>
+        <!-- pier -->
+        <g stroke="#cfe3f4" stroke-width="1" opacity="0.45">
+          <path d="M176 652 L136 700"/>
+          <path d="M148 686 L156 692"/>
+        </g>
+        <!-- beach-town grid, angled to the shore -->
+        <g stroke="#a9cee9" stroke-width="0.6" opacity="0.24" transform="rotate(40 190 610)">
+          <path d="M120 520 H340 M120 548 H340 M120 576 H340 M120 604 H340 M120 632 H340"/>
+          <path d="M150 500 V650 M186 500 V650 M222 500 V650 M258 500 V650 M294 500 V650"/>
+        </g>
+        <text x="70" y="566" font-size="9" fill="#cfe3f4" opacity="0.5" letter-spacing="2" transform="rotate(14 70 566)">SANTA MONICA BAY</text>
 
         <!-- survey crosses -->
         <g stroke="#cfe3f4" stroke-width="1" opacity="0.5">
@@ -434,6 +540,40 @@
         <text x="80" y="692" font-size="9" fill="#cfe3f4" opacity="0.6" letter-spacing="1.5">0</text>
         <text x="240" y="692" text-anchor="end" font-size="9" fill="#cfe3f4" opacity="0.6" letter-spacing="1.5">2,000 FT</text>
         <text x="80" y="722" font-size="9" fill="#cfe3f4" opacity="0.55" letter-spacing="2">SCALE 1:5000</text>
+
+        <!-- scanning beam -->
+        <g class="scan-beam">
+          <rect x="-160" y="34" width="150" height="742" fill="url(#beam-g)"/>
+          <rect x="-11" y="34" width="1.5" height="742" fill="#8fd0ff" opacity="0.3"/>
+        </g>
+
+        <!-- cycling AI highlights -->
+        <g class="scan-t t1">
+          <g transform="rotate(-20.15 1090 316)">
+            <rect class="scan-sweep" x="1084" y="303" width="104" height="18" rx="2" fill="#d8b46a" opacity="0.3"/>
+          </g>
+          <rect x="1148" y="330" width="168" height="22" rx="2" fill="#0a2c4e" opacity="0.9" stroke="#d8b46a" stroke-width="0.75"/>
+          <circle class="scan-dot" cx="1160" cy="341" r="3" fill="#d8b46a"/>
+          <text x="1170" y="345" font-size="10" fill="#d8b46a" letter-spacing="1.5">BEARING CONFIRMED</text>
+        </g>
+        <g class="scan-t t2">
+          <rect class="scan-sweep" x="1068" y="256" width="112" height="17" rx="2" fill="#d8b46a" opacity="0.3"/>
+          <rect x="996" y="220" width="176" height="22" rx="2" fill="#0a2c4e" opacity="0.9" stroke="#d8b46a" stroke-width="0.75"/>
+          <circle class="scan-dot" cx="1008" cy="231" r="3" fill="#d8b46a"/>
+          <text x="1018" y="235" font-size="10" fill="#d8b46a" letter-spacing="1.5">CURVE WITHIN SPEC</text>
+        </g>
+        <g class="scan-t t3">
+          <path class="scan-box" d="M890 503 V485 H908 M1000 485 H1018 V503 M1018 595 V613 H1000 M908 613 H890 V595" stroke="#d8b46a" stroke-width="1.5"/>
+          <rect x="884" y="450" width="186" height="22" rx="2" fill="#0a2c4e" opacity="0.9" stroke="#d8b46a" stroke-width="0.75"/>
+          <circle class="scan-dot" cx="896" cy="461" r="3" fill="#d8b46a"/>
+          <text x="906" y="465" font-size="10" fill="#d8b46a" letter-spacing="1.5">DETAIL 3 · REVIEWED</text>
+        </g>
+        <g class="scan-t t4">
+          <path class="scan-box" d="M812 570 V552 H830 M960 552 H978 V570 M978 640 V658 H960 M830 658 H812 V640" stroke="#d8b46a" stroke-width="1.5"/>
+          <rect x="812" y="522" width="182" height="22" rx="2" fill="#0a2c4e" opacity="0.9" stroke="#d8b46a" stroke-width="0.75"/>
+          <circle class="scan-dot" cx="824" cy="533" r="3" fill="#d8b46a"/>
+          <text x="834" y="537" font-size="10" fill="#d8b46a" letter-spacing="1.5">OPEN SPACE · 3.1 AC</text>
+        </g>
       </g>
 
       <!-- title block -->
@@ -450,6 +590,10 @@
       <text x="1302" y="700" font-size="10" fill="#cfe3f4" opacity="0.7" letter-spacing="1.5">SHEET</text>
       <text x="1302" y="723" font-size="10" fill="#cfe3f4" opacity="0.9" letter-spacing="1.5">001</text>
     </svg>
+    <div class="hero-lamp">
+      <div class="lamp-brighten"></div>
+      <div class="lamp-glow"></div>
+    </div>
   </div>
   <div class="wrap">
     <div class="rule"></div>
@@ -602,6 +746,46 @@
       });
     }, { rootMargin: "0px 0px -8% 0px" });
     document.querySelectorAll(".reveal").forEach(function (el) { io.observe(el); });
+  })();
+
+  (function () {
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    var hero = document.querySelector(".hero");
+    var bg = hero && hero.querySelector(".hero-bg");
+    if (bg) {
+      var tx = 0.5, ty = 0.42, cx = tx, cy = ty, raf = null;
+      var tick = function () {
+        cx += (tx - cx) * 0.14;
+        cy += (ty - cy) * 0.14;
+        bg.style.setProperty("--mx", (cx * 100).toFixed(2) + "%");
+        bg.style.setProperty("--my", (cy * 100).toFixed(2) + "%");
+        bg.style.setProperty("--par-x", ((cx - 0.5) * -22).toFixed(2) + "px");
+        bg.style.setProperty("--par-y", ((cy - 0.5) * -14).toFixed(2) + "px");
+        if (Math.abs(tx - cx) + Math.abs(ty - cy) > 0.002) {
+          raf = requestAnimationFrame(tick);
+        } else {
+          raf = null;
+        }
+      };
+      hero.addEventListener("mousemove", function (e) {
+        var r = hero.getBoundingClientRect();
+        tx = (e.clientX - r.left) / r.width;
+        ty = (e.clientY - r.top) / r.height;
+        hero.classList.add("lit");
+        if (!raf) raf = requestAnimationFrame(tick);
+      });
+      hero.addEventListener("mouseleave", function () { hero.classList.remove("lit"); });
+    }
+
+    document.querySelectorAll(".work-item, .step").forEach(function (card) {
+      card.addEventListener("mousemove", function (e) {
+        var r = card.getBoundingClientRect();
+        card.style.setProperty("--cx", ((e.clientX - r.left) / r.width * 100).toFixed(2) + "%");
+        card.style.setProperty("--cy", ((e.clientY - r.top) / r.height * 100).toFixed(2) + "%");
+      });
+    });
   })();
 </script>
 
