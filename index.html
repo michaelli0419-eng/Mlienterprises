@@ -25,7 +25,8 @@
   "name": "MLI Enterprises LLC",
   "description": "Management consulting and custom application development for operating businesses.",
   "areaServed": "California",
-  "email": "contact@mlienterprises.com",
+  "email": "michael@mlienterprises.com",
+  "telephone": "+1-909-999-6850",
   "url": "https://mlienterprises.vercel.app/",
   "employee": { "@type": "Person", "name": "Michael Li", "url": "https://michaelli.co" }
 }
@@ -379,6 +380,7 @@
   .contact .sec-num { color: var(--bp); background: #d8b46a; }
   .contact p { max-width: 56ch; margin-bottom: 28px; color: #b9cfe3; }
   .contact ::selection { background: #d8b46a; color: var(--bp); }
+  .contact-cta { display: flex; flex-wrap: wrap; gap: 14px; }
   .contact .email {
     font-family: "DM Mono", ui-monospace, Consolas, monospace;
     font-size: clamp(1.15rem, 1rem + 1vw, 1.55rem);
@@ -1015,8 +1017,11 @@
   <div class="wrap sec-grid">
     <div class="sec-label reveal"><span class="sec-num">06</span><h2>Contact</h2></div>
     <div class="reveal">
-      <p>If you have an operational problem that software should be solving, write a few sentences about it. We reply to every serious inquiry.</p>
-      <a class="email" href="mailto:contact@mlienterprises.com">contact@mlienterprises.com</a>
+      <p>If you have an operational problem that software should be solving, call — or write a few sentences about it. We reply to every serious inquiry.</p>
+      <div class="contact-cta">
+        <a class="email" href="tel:+19099996850">(909) 999-6850</a>
+        <a class="email" href="mailto:michael@mlienterprises.com">michael@mlienterprises.com</a>
+      </div>
     </div>
   </div>
 </section>
@@ -1026,7 +1031,7 @@
 <footer>
   <div class="wrap">
     <span>© 2026 MLI Enterprises LLC · California</span>
-    <a href="mailto:contact@mlienterprises.com">contact@mlienterprises.com</a>
+    <span><a href="tel:+19099996850">(909) 999-6850</a> · <a href="mailto:michael@mlienterprises.com">michael@mlienterprises.com</a></span>
   </div>
 </footer>
 
